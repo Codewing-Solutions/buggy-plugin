@@ -1,13 +1,16 @@
+<?php
 function printGrade($marks) {
-    if ($marks >= 90 && $marks <= 100) {
+    if ($marks === null || !is_numeric($marks)) {
+        echo "Invalid Marks\n";
+    } else if ($marks >= 90 && $marks <= 100) {
         echo "Grade: A\n";
     } else if ($marks >= 80 && $marks < 90) {
         echo "Grade: B\n";
     } else if ($marks >= 70 && $marks < 80) {
         echo "Grade: C\n";
-    } else if ($marks >= 60 && $marks < 70)
+    } else if ($marks >= 60 && $marks < 70) {
         echo "Grade: D\n";
-    } elseif ($marks < 60) {
+    } else if ($marks < 60) {
         echo "Grade: F\n";
     } else {
         echo "Invalid Marks\n";
@@ -25,6 +28,8 @@ $students = [
 
 foreach ($students as $student) {
     echo "Student: " . $student["name"] . "\n";
-    printGrade($student["score"]);
+    // Use null coalescing operator to avoid undefined index notice
+    printGrade($student["score"] ?? null);
     echo "------------------\n";
 }
+?>
