@@ -1,16 +1,24 @@
-function printGrade($marks) {
-    if ($marks >= 90 && $marks <= 100) {
+<?php
+
+function printGrade($marks)
+{
+    if (!is_numeric($marks)) {
+        echo "Grade: Invalid Marks\n";
+        return;
+    }
+
+    if ($marks < 0 || $marks > 100) {
+        echo "Grade: Invalid Marks\n";
+    } elseif ($marks >= 90) {
         echo "Grade: A\n";
-    } else if ($marks >= 80 && $marks < 90) {
+    } elseif ($marks >= 80) {
         echo "Grade: B\n";
-    } else if ($marks >= 70 && $marks < 80) {
+    } elseif ($marks >= 70) {
         echo "Grade: C\n";
-    } else if ($marks >= 60 && $marks < 70)
+    } elseif ($marks >= 60) {
         echo "Grade: D\n";
-    } elseif ($marks < 60) {
-        echo "Grade: F\n";
     } else {
-        echo "Invalid Marks\n";
+        echo "Grade: F\n";
     }
 }
 
@@ -24,7 +32,12 @@ $students = [
 ];
 
 foreach ($students as $student) {
-    echo "Student: " . $student["name"] . "\n";
-    printGrade($student["score"]);
+    $name = $student["name"] ?? "Unknown";
+    $score = $student["score"] ?? null;
+
+    echo "Student: $name\n";
+    printGrade($score);
     echo "------------------\n";
 }
+
+
